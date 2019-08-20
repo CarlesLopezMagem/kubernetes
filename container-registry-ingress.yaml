@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: container-registry
+  namespace: container-registry
+spec:
+  rules:
+   - host: registry.lesquerra.cat
+     http:
+      paths:
+       - backend:
+           serviceName: registry
+           servicePort: 5000
+  tls:
+  - hosts:
+    - registry.lesquerra.cat
+    secretName: tlssecret
