@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  namespace: nextcloud
+  labels:
+    app: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - image: nginx
+          volumeMounts:
+            - mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+              name: nginx-conf
+            - mountPath: /var/www/html
+              name: nc-persistent-storage
+          name: mariadb
+          ports:
+            - containerPort: 80
+              name: http
+            - containerPort: 443
+              name: https
+      volumes:
+        - name: nginx-conf
+          configMap:
+            name: nginx-conf
+        - name: nc-persistent-storage
+          persistentVolumeClaim:
+            claimName: nextcloud

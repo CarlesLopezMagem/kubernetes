@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: nextcloud
+  namespace: nextcloud
+  annotations:
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      client_max_body_size 5tb;
+      proxy_request_buffering off;
+spec:
+  rules:
+   - host: cloud.lesquerra.cat
+     http:
+      paths:
+       - backend:
+           serviceName: nginx
+           servicePort: 80

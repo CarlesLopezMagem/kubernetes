@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextcloud
+  namespace: nextcloud
+  labels:
+    app: nextcloud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nextcloud
+  template:
+    metadata:
+      labels:
+        app: nextcloud
+    spec:
+      containers:
+        - image: nextcloud:fpm-alpine
+          name: nextcloud
+          env:
+            - name: NEXTCLOUD_ADMIN_USER
+              value: admin
+            - name: NEXTCLOUD_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: nextcloud
+                  key: password
+            - name: NEXTCLOUD_TRUSTED_DOMAINS
+              value: cloud.lesquerra.cat
+            - name: MYSQL_DATABASE
+              value: nextcloud
+            - name: MYSQL_HOST
+              value: mariadb
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql
+                  key: password
+            - name: MYSQL_USER
+              value: root
+          ports:
+            - containerPort: 9000
+              name: app
+          volumeMounts:
+            - mountPath: /var/www/html
+              name: nc-persistent-storage
+      volumes:
+        - name: nc-persistent-storage
+          persistentVolumeClaim:
+            claimName: nextcloud
