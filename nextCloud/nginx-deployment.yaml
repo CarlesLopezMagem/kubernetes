@@ -21,14 +21,15 @@ spec:
             - mountPath: /etc/nginx/nginx.conf
               subPath: nginx.conf
               name: nginx-conf
+            - mountPath: /etc/nginx/conf.d/uploadsize.conf
+              subPath: uploadsize.conf
+              name: nginx-conf
             - mountPath: /var/www/html
               name: nc-persistent-storage
-          name: mariadb
+          name: nginx
           ports:
             - containerPort: 80
               name: http
-            - containerPort: 443
-              name: https
       volumes:
         - name: nginx-conf
           configMap:

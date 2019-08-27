@@ -4,9 +4,7 @@ metadata:
   name: nextcloud
   namespace: nextcloud
   annotations:
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      client_max_body_size 5tb;
-      proxy_request_buffering off;
+    nginx.ingress.kubernetes.io/proxy-body-size: "50G"
 spec:
   rules:
    - host: cloud.lesquerra.cat
