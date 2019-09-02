@@ -47,7 +47,7 @@
 6. Create nginx deployment and service
 
     ```bash
-    kubectl create configmap nginx-conf --from-file=nginx.conf=nginx.conf --from-file=uploadsize.conf=uploadsize.conf -n=nextcloud
+    kubectl create configmap nginx-conf --from-file=nginx.conf=nginx.conf -n=nextcloud
     kubectl apply -f nginx-deployment.yaml
     kubectl apply -f nginx-service.yaml
     ```

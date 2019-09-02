@@ -21,9 +21,6 @@ spec:
             - mountPath: /etc/nginx/nginx.conf
               subPath: nginx.conf
               name: nginx-conf
-            - mountPath: /etc/nginx/conf.d/uploadsize.conf
-              subPath: uploadsize.conf
-              name: nginx-conf
             - mountPath: /var/www/html
               name: nc-persistent-storage
           name: nginx
