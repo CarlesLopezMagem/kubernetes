@@ -2,14 +2,9 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: homeservice-ingress
+  namespace: default
 spec:
   rules:
-   - host: hello.lesquerra.cat
-     http:
-       paths:  
-        - backend:
-            serviceName: hello
-            servicePort: 80
    - host: repasavinyo.lesquerra.cat
      http:
       paths:
