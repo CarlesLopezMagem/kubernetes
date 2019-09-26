@@ -39,6 +39,8 @@ spec:
                   key: password
             - name: MYSQL_USER
               value: root
+            - name: REDIS_HOST
+              value: redis
           ports:
             - containerPort: 9000
               name: app

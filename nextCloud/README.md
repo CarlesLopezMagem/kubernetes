@@ -30,21 +30,28 @@
     kubectl create secret generic nextcloud --from-literal=password={PASSWORD} -n=nextcloud
     ```
 
-4. Create db deployment and service
+4. Create redis deployment and service
+
+    ```bash
+    kubectl apply -f redis-deployment.yaml
+    kubectl apply -f redis-service.yaml
+    ```
+
+5. Create db deployment and service
 
     ```bash
     kubectl apply -f db-deployment.yaml
     kubectl apply -f db-service.yaml
     ```
 
-5. Create nextcloud deployment and service
+6. Create nextcloud deployment and service
 
     ```bash
     kubectl apply -f nc-deployment.yaml
     kubectl apply -f nc-service.yaml
     ```
 
-6. Create nginx deployment and service
+7. Create nginx deployment and service
 
     ```bash
     kubectl create configmap nginx-conf --from-file=nginx.conf=nginx.conf -n=nextcloud
@@ -52,7 +59,7 @@
     kubectl apply -f nginx-service.yaml
     ```
 
-7. Create ingress
+8. Create ingress
 
     ```bash
     kubectl apply -f ingress.yaml
