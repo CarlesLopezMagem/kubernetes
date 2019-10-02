@@ -13,3 +13,7 @@ spec:
        - backend:
            serviceName: nginx
            servicePort: 80
+  tls:
+  - hosts:
+    - cloud.lesquerra.cat
+    secretName: tlssecret

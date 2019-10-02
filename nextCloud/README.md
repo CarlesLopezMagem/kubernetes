@@ -1,4 +1,4 @@
-# ownCloud
+# nextCloud
 
 1. Create namespace
 
@@ -59,8 +59,9 @@
     kubectl apply -f nginx-service.yaml
     ```
 
-8. Create ingress
+8. Create https ingress
 
     ```bash
+    kubectl create secret tls tlssecret --key key.pem --cert cert.pem -n nextCloud
     kubectl apply -f ingress.yaml
     ```
