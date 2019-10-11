@@ -3,6 +3,9 @@ kind: Ingress
 metadata:
   name: container-registry
   namespace: container-registry
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    kubernetes.io/tls-acme: 'true'
 spec:
   rules:
    - host: registry.lesquerra.cat
