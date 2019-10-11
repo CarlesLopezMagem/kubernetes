@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: onlyoffice
+  namespace: onlyoffice
+spec:
+  rules:
+   - host: docs.lesquerra.cat
+     http:
+      paths:
+       - backend:
+           serviceName: onlyoffice
+           servicePort: 80
+  tls:
+  - hosts:
+    - docs.lesquerra.cat
+    secretName: tlssecret
