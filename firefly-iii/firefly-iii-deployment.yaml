@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: firefly-iii
+  namespace: firefly-iii
+  labels:
+    app: firefly-iii
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: firefly-iii
+  template:
+    metadata:
+      labels:
+        app: firefly-iii
+    spec:
+      containers:
+        - image: jc5x/firefly-iii:latest
+          name: firefly-iii
+          env:
+            - name: DB_HOST
+              value: mysql
+            - name: DB_DATABASE
+              value: firefly
+            - name: DB_USERNAME
+              value: root
+            - name: DB_CONNECTION
+              value: mysql
+            - name: DB_PORT
+              value: '3306'
+            - name: APP_DEBUG
+              value: 'true'
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql
+                  key: password
+            - name: APP_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: firefly-iii
+                  key: app_key
+            - name: APP_URL
+              value: http://finance.lesquerra.cat
+            - name: TRUSTED_PROXIES
+              value: '**'
+          ports:
+            - containerPort: 80
+              name: http
+          volumeMounts:
+            - name: firefly-iii-export-storage
+              mountPath: /var/www/firefly-iii/storage/export
+            - name: firefly-iii-upload-storage
+              mountPath: /var/www/firefly-iii/storage/upload
+      volumes:
+        - name: firefly-iii-export-storage
+          persistentVolumeClaim:
+            claimName: firefly-iii-export
+        - name: firefly-iii-upload-storage
+          persistentVolumeClaim:
+            claimName: firefly-iii-upload
