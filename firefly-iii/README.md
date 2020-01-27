@@ -48,6 +48,12 @@
 
 6. Create https ingress
 
+    Create self-service certificate (optional)
+
+    ```bash
+    openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout key.pem -out cert.pem -subj "/CN=finance.lesquerra.cat/O=finance.lesquerra.cat"
+    ```
+
     ```bash
     kubectl create secret tls tlssecret --key key.pem --cert cert.pem -n firefly-iii
     kubectl apply -f ingress.yaml

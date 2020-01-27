@@ -13,3 +13,7 @@ spec:
        - backend:
            serviceName: firefly-iii
            servicePort: 80
+  tls:
+    - hosts:
+      - finance.lesquerra.cat
+      secretName: tlssecret
