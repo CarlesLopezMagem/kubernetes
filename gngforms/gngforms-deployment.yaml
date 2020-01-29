@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gngforms
+  namespace: gngforms
+  labels:
+    app: gngforms
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gngforms
+  template:
+    metadata:
+      labels:
+        app: gngforms
+    spec:
+      containers:
+        - image: registry.lesquerra.cat/gngforms
+          name: gngforms
+          volumeMounts:
+              - mountPath: /opt/GNGforms/config/
+                name: gng-config
+      volumes:
+        - name: gng-config
+          configMap:
+             name: gng-config
+             items:
+              - key: config.cfg
+                path:  config.cfg

@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: gngforms
+  namespace: gngforms
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "50G"
+spec:
+  rules:
+   - host: forms.lesquerra.cat
+     http:
+      paths:
+       - backend:
+           serviceName: gngforms
+           servicePort: 5001
