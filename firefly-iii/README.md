@@ -42,8 +42,8 @@
 5. Create firefly deployment and service
 
     ```bash
-    kubectl apply -f db-deployment.yaml
-    kubectl apply -f db-service.yaml
+    kubectl apply -f firefly-iii-deployment.yaml
+    kubectl apply -f firefly-iii-service.yaml
     ```
 
 6. Create https ingress
