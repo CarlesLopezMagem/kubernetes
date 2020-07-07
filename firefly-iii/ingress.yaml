@@ -12,7 +12,7 @@ spec:
       paths:
        - backend:
            serviceName: firefly-iii
-           servicePort: 80
+           servicePort: 8080
   tls:
     - hosts:
       - finance.lesquerra.cat

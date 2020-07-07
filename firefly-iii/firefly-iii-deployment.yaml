@@ -42,11 +42,11 @@ spec:
                   name: firefly-iii
                   key: app_key
             - name: APP_URL
-              value: http://finance.lesquerra.cat
+              value: https://finance.lesquerra.cat
             - name: TRUSTED_PROXIES
               value: '**'
           ports:
-            - containerPort: 80
+            - containerPort: 8080
               name: http
           volumeMounts:
             - name: firefly-iii-export-storage
