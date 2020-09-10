@@ -62,6 +62,6 @@
 8. Create https ingress
 
     ```bash
-    kubectl create secret tls tlssecret --key key.pem --cert cert.pem -n nextCloud
+    kubectl apply -f issuer.yaml
     kubectl apply -f ingress.yaml
     ```
