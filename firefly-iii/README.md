@@ -29,7 +29,7 @@
 
     ```bash
     kubectl create secret generic mysql --from-literal=password={PASSWORD} -n=firefly-iii
-    kubectl create secret generic firefly-iii --from-literal=app-key='{APP-KEY}'  -n=firefly-iii
+    kubectl create secret generic firefly-iii --from-literal=app_key='{APP-KEY}'  -n=firefly-iii
     ```
 
 4. Create db deployment and service
@@ -48,13 +48,7 @@
 
 6. Create https ingress
 
-    Create self-service certificate (optional)
-
     ```bash
-    openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout key.pem -out cert.pem -subj "/CN=finance.lesquerra.cat/O=finance.lesquerra.cat"
-    ```
-
-    ```bash
-    kubectl create secret tls tlssecret --key key.pem --cert cert.pem -n firefly-iii
+    kubectl apply -f issuer.yaml
     kubectl apply -f ingress.yaml
     ```

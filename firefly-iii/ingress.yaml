@@ -5,6 +5,8 @@ metadata:
   namespace: firefly-iii
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "50G"
+    cert-manager.io/issuer: prod
+    kubernetes.io/tls-acme: "true"
 spec:
   rules:
    - host: finance.lesquerra.cat
