@@ -1,25 +1,18 @@
 FROM python:3.7-alpine
 
-RUN pip install flask \
-    && pip install flask_script \
-    && pip install flask_pymongo \
-    && pip install Markdown \
-    && pip install unidecode \
-    && pip install flask_babel \
-    && pip install validate_email \
-    && pip install password_strength \
-    && pip install passlib \
-    && pip install gunicorn \
-    && pip install flask_wtf
+COPY app /opt/LiberaForms
+COPY config.docker.cfg /opt/LiberaForms/config.cfg
+COPY entrypoint.sh /opt/LiberaForms/entrypoint.sh
+RUN chmod +x /opt/LiberaForms/entrypoint.sh
+COPY gunicorn.py /opt/LiberaForms/gunicorn.py
 
-COPY app /opt/GNGforms
-COPY config.docker.cfg /opt/GNGforms/config.cfg
-COPY entrypoint.sh /opt/GNGforms/entrypoint.sh
-RUN chmod +x /opt/GNGforms/entrypoint.sh
-COPY gunicorn_gngforms.py /opt/gunicorn_gngforms.py
+RUN pip install --upgrade setuptools \
+    pip install wheel \
+    pip install -r /opt/LiberaForms/requirements.txt \
+    pip install gunicorn
 
 EXPOSE 5001
 
-ENTRYPOINT ["sh", "/opt/GNGforms/entrypoint.sh" ]
+ENTRYPOINT ["sh", "/opt/LiberaForms/entrypoint.sh" ]
 
-CMD ["gunicorn", "-c", "/opt/gunicorn_gngforms.py", "GNGforms:app"]
+CMD ["gunicorn", "-c", "/opt/LiberaForms/gunicorn.py", "liberaforms:app"]

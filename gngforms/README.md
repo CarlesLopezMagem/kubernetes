@@ -49,3 +49,10 @@
     kubectl apply -f gngforms-deployment.yaml
     kubectl apply -f gngforms-service.yaml
     ```
+
+6. Create gngforms issuer and ingress
+
+    ```bash
+    kubectl apply -f issuer.yaml
+    kubectl apply -f ingress.yaml
+    ```

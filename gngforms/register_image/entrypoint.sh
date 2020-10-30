@@ -1,7 +1,7 @@
 #/bin/sh
 
-if [ -e config/config.cfg ]
- then cp config/config.cfg ./
+if [ -e /opt/LiberaForms/config/config.cfg ]
+ then cp /opt/LiberaForms/config/config.cfg /opt/LiberaForms/config.cfg
 fi
 
 echo "$@"

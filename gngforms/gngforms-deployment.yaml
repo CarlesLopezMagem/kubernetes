@@ -19,12 +19,12 @@ spec:
         - image: registry.lesquerra.cat/gngforms
           name: gngforms
           volumeMounts:
-              - mountPath: /opt/GNGforms/config/
+              - mountPath: /opt/LiberaForms/config/
                 name: gng-config
       volumes:
         - name: gng-config
           configMap:
-             name: gng-config
+             name: gngforms-config
              items:
               - key: config.cfg
                 path:  config.cfg

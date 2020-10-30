@@ -7,4 +7,4 @@ services:
     ports:
       - "5001:5001"
     volumes:
-      - ./config.docker.cfg:/opt/GNGforms/config.cfg
+      - ./config.docker.cfg:/opt/LiberaForms/config.cfg

@@ -5,6 +5,8 @@ metadata:
   namespace: gngforms
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "50G"
+    cert-manager.io/issuer: prod
+    kubernetes.io/tls-acme: "true"
 spec:
   rules:
    - host: forms.lesquerra.cat
@@ -13,3 +15,7 @@ spec:
        - backend:
            serviceName: gngforms
            servicePort: 5001
+  tls:
+  - hosts:
+    - forms.lesquerra.cat
+    secretName: tlssecret
