@@ -44,6 +44,29 @@ RUN mkdir -p \
     /var/run/supervisord \
 ;
 
+# Preview CronJob
+RUN echo "*/10 * * * * php /var/www/html/occ preview:pre-generate" >> /etc/crontabs/www-data 
+
+# Install pdlib
+
+RUN apk add -X http://dl-cdn.alpinelinux.org/alpine/edge/testing dlib
+
+RUN wget https://github.com/goodspb/pdlib/archive/master.zip \
+  && mkdir -p /usr/src/php/ext/ \
+  && unzip -d /usr/src/php/ext/ master.zip \
+  && rm master.zip
+RUN docker-php-ext-install pdlib-master
+
+RUN apk add bzip2-dev
+RUN docker-php-ext-install bz2
+
+# Face Recognition
+
+RUN echo "memory_limit=2048M" > /usr/local/etc/php/conf.d/memory-limit.ini
+
+RUN echo "*/30 * * * * php -f /var/www/html/occ face:background_job -t 900" >> /etc/crontabs/www-data 
+
+
 COPY supervisord.conf /
 
 ENV NEXTCLOUD_UPDATE=1
