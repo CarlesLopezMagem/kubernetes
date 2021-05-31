@@ -6,6 +6,7 @@ metadata:
   annotations:
     cert-manager.io/issuer: prod
     nginx.ingress.kubernetes.io/proxy-body-size: "50G"
+    acme.cert-manager.io/http01-ingress-class: "public"
 spec:
   rules:
    - host: cloud.lesquerra.cat
