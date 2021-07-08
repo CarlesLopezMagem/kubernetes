@@ -62,7 +62,8 @@ RUN docker-php-ext-install bz2
 
 # Face Recognition
 
-RUN echo "memory_limit=2048M" > /usr/local/etc/php/conf.d/memory-limit.ini
+ENV PHP_MEMORY_LIMIT 2048M
+# RUN echo "memory_limit=2048M" > /usr/local/etc/php/conf.d/memory-limit.ini
 
 RUN echo "*/30 * * * * php -f /var/www/html/occ face:background_job -t 900" >> /etc/crontabs/www-data 
 
