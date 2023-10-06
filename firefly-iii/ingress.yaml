@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: firefly-iii
@@ -13,9 +13,13 @@ spec:
    - host: finance.lesquerra.cat
      http:
       paths:
-       - backend:
-           serviceName: firefly-iii
-           servicePort: 8080
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: firefly-iii
+              port:
+                number: 8080
   tls:
     - hosts:
       - finance.lesquerra.cat

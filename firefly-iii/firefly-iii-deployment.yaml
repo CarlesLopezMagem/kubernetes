@@ -16,7 +16,7 @@ spec:
         app: firefly-iii
     spec:
       containers:
-        - image: jc5x/firefly-iii:latest
+        - image: fireflyiii/core
           name: firefly-iii
           env:
             - name: DB_HOST

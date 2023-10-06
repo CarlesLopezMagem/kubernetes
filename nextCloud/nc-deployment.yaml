@@ -16,7 +16,7 @@ spec:
         app: nextcloud
     spec:
       containers:
-        - image: nextcloud:fpm-alpine
+        - image: nextcloud:27-fpm-alpine
           name: nextcloud
           env:
             - name: NEXTCLOUD_ADMIN_USER
